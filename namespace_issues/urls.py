@@ -1,21 +1,9 @@
-"""namespace_issues URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.9/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
 from django.conf.urls import include, url
 
+# app_name can be specified in the include() call, but that is
+# deprecated, so it's better to put it in the urls.py file for the app
+
 urlpatterns = [
-    url(r'^app1/', include('app1.urls', namespace='app1')),
-    url(r'^app2/', include('app2.urls', namespace='app2')),
+    url(r'^app1/', include('app1.urls', app_name='app1', namespace='non-app-name')),
+    url(r'^app2/', include('app2.urls', namespace='random')),
 ]

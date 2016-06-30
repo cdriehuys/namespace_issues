@@ -1,15 +1,19 @@
 from django.core.urlresolvers import reverse
-
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def index_view(request):
-    """ Index view for app1 """
-    response = HttpResponse()
-    response.write('<p>This is the index view for app2</p>')
+    """ Index view for app2 """
+    context = {}
 
-    url = reverse('index')
+    # Calls to reverse() should use the 'app_name' as the namespace.
+    # 'app_name' is defined in urls.py
 
-    response.write('<p>My url is: {}'.format(url))
+    app1_url = reverse('app1:index')
+    context['app1_url'] = app1_url
 
-    return response
+    app2_url = reverse('app2:index')
+    context['app2_url'] = app2_url
+
+    return render(request, 'app2/index.html', context)
